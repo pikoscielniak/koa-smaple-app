@@ -1,1 +1,7 @@
-1. git init
+git init
+npm init
+touch .gitignore
+git status
+git add -A
+git commit -am "init"
+
