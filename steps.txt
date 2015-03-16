@@ -47,3 +47,8 @@ mkdir lib
 touch lib/db.js
 creating db.js
 git add -A
+git commit -am "refactoring db lib"
+
+PUSH TO REMOTE REPO
+git remote add origin https://piotrekbass@bitbucket.org/piotrekbass/dwo2015_1.git
+git push -u origin master
