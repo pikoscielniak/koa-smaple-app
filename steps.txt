@@ -4,4 +4,9 @@ touch .gitignore
 git status
 git add -A
 git commit -am "init"
+mkdir test
+touch project.spec.js
+npm install mocha --save-dev
+node_modules to gitignore
+npm install chai --save-dev
 
