@@ -2,9 +2,8 @@ var expect = require('chai').expect;
 var app = require('../app');
 var request = require('supertest').agent(app.listen());
 var co = require('co');
-var monk = require('monk');
-var db = monk(process.env.DB_CONNECTION)
-var wrap = require('co-monk');
+
+var db = require('../lib/db');
 
 describe('project', function () {
 
@@ -13,7 +12,7 @@ describe('project', function () {
         beforeEach(function (done) {
 
             co(function *() {
-                var projects = wrap(db.get('projects'));
+                var projects = db.projects;
                 yield projects.remove({});
                 yield projects.insert({title: 'First project'});
                 yield projects.insert({title: 'Second project'});
