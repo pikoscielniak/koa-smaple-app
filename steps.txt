@@ -16,4 +16,5 @@ git commit -m "added mocha and chai"
 
 enter example test
 and run it node_modules/.bin/mocha
+git commit -am "test setup"
 
