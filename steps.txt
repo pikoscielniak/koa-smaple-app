@@ -28,5 +28,20 @@ git add -A
 git commit -am "test setup on supertest"
 
 
+LIST OF PROJECTS
+npm install koa-route --save
+/project route
+npm install monk --save
+npm install co-monk --save
+in this place database setup in c9
+returns list
+    route
+    db find
+    before to add something to list
+npm install co --save-dev
+test fetching list
+git status
+git commit -am "fetching projects"
+
 
 
