@@ -19,3 +19,14 @@ and run it node_modules/.bin/mocha
 command test added to package.json
 git commit -am "test setup"
 
+SETUP TEST ON KOA
+npm install koa --save
+simple hello world app
+npm install supertest --save-dev
+added --harmony to test command
+git add -A
+git commit -am "test setup on supertest"
+
+
+
+

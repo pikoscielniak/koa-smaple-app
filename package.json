@@ -4,12 +4,16 @@
   "description": "A learning project",
   "main": "index.js",
   "scripts": {
-    "test": "node node_modules/.bin/mocha"
+    "test": "node node_modules/.bin/mocha --harmony"
   },
   "author": "piotrekbass",
   "license": "ISC",
   "devDependencies": {
     "chai": "^2.1.2",
-    "mocha": "^2.2.1"
+    "mocha": "^2.2.1",
+    "supertest": "^0.15.0"
+  },
+  "dependencies": {
+    "koa": "^0.18.1"
   }
 }
