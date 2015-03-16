@@ -1,0 +1,12 @@
+Use cases
+
+List projects
+Add project
+Register team
+Sign in
+Sign out
+Vote on project
+    -only authenticated user
+    -can not vote on your own project
+    -order by most voted
+*Clearing votes
