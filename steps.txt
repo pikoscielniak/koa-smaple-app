@@ -9,4 +9,7 @@ touch project.spec.js
 npm install mocha --save-dev
 node_modules to gitignore
 npm install chai --save-dev
+git add -A
+git commit -m "added mocha and chai"
+
 
