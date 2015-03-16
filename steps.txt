@@ -4,6 +4,7 @@ touch .gitignore
 git status
 git add -A
 git commit -am "init"
+
 mkdir test
 touch project.spec.js
 npm install mocha --save-dev
@@ -12,4 +13,7 @@ npm install chai --save-dev
 git add -A
 git commit -m "added mocha and chai"
 
+
+enter example test
+and run it node_modules/.bin/mocha
 
