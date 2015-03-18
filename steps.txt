@@ -55,9 +55,13 @@ git push -u origin master
 
 INSERT UI
 mkdir www
+mkdir www/lib
 npm install koa-static --save
 touch www/index.html
 some content in index.html
 npm start   "start": "node --harmony app.js"
 localhost:3000/index.html
 snippet with html
+npm install angular --save
+add boostrap template
+bootstrap in index.html
