@@ -1,3 +1,4 @@
 .idea
 node_modules
 environment.sh
+npm-debug.log

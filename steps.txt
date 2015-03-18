@@ -52,3 +52,12 @@ git commit -am "refactoring db lib"
 PUSH TO REMOTE REPO
 git remote add origin https://piotrekbass@bitbucket.org/piotrekbass/dwo2015_1.git
 git push -u origin master
+
+INSERT UI
+mkdir www
+npm install koa-static --save
+touch www/index.html
+some content in index.html
+npm start   "start": "node --harmony app.js"
+localhost:3000/index.html
+snippet with html

@@ -14,8 +14,13 @@ describe('project', function () {
             co(function *() {
                 var projects = db.projects;
                 yield projects.remove({});
-                yield projects.insert({title: 'First project'});
-                yield projects.insert({title: 'Second project'});
+                var yieldables = [
+                    projects.insert({title: 'First project'}),
+                    projects.insert({title: 'Second project'})
+                ];
+                //yield projects.insert({title: 'First project'});
+                //yield projects.insert({title: 'Second project'});
+                yield yieldables;
             }).then(done, done);
         });
 
