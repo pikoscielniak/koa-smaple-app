@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var app = require('../app');
+var app = require('../server');
 var request = require('supertest').agent(app.listen());
 var co = require('co');
 
@@ -18,8 +18,6 @@ describe('project', function () {
                     projects.insert({title: 'First project'}),
                     projects.insert({title: 'Second project'})
                 ];
-                //yield projects.insert({title: 'First project'});
-                //yield projects.insert({title: 'Second project'});
                 yield yieldables;
             }).then(done, done);
         });
