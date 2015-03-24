@@ -59,4 +59,7 @@ mkdir public
 mkdir public/css
 add bootstrap.css
 commit
+
+npm install ejs --save
 npm install co-views --save
+mkdir views
