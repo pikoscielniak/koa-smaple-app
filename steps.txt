@@ -59,3 +59,4 @@ mkdir public
 mkdir public/css
 add bootstrap.css
 commit
+npm install co-views --save
