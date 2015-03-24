@@ -55,38 +55,7 @@ git remote add origin https://piotrekbass@bitbucket.org/piotrekbass/dwo2015_1.gi
 git push -u origin master
 
 INSERT UI
-mkdir www
-mkdir www/lib
-npm install koa-static --save
-touch www/index.html
-some content in index.html
-npm start   "start": "node --harmony app.js"
-localhost:3000/index.html
-snippet with html
-npm install angular --save
-add boostrap template
-bootstrap in index.html
-
-SETUP ANGULARA
-npm install gulp --save-dev
-npm install browserify --save-dev
-npm install browserify-shim --save-dev
-snippet with browserify in package.json
-npm install vinyl-source-stream --save-dev
-mkdir www/js
-
-touch gulpfile.js
-snippet with content
-  "browserify": {
-    "transform": [
-      "browserify-shim"
-    ]
-  },
-  "browser": {
-    "angular": "./node_modules/angular/angular.js"
-  },
-  "browserify-shim": {
-    "angular": "angular"
-  },
-./node_modules/.bin/gulp browserify
-
+mkdir public
+mkdir public/css
+add bootstrap.css
+commit
