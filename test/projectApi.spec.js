@@ -10,7 +10,6 @@ describe('project api', function () {
     describe('get /api/project', function () {
 
         beforeEach(function (done) {
-
             co(function *() {
                 var projects = db.projects;
                 yield projects.remove({});

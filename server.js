@@ -19,9 +19,10 @@ app.use(route.get('/api/project', function * () {
 }));
 
 app.use(route.get('/projects', function *() {
+    var projects = yield db.projects.find({});
     var vm = {
-        title: 'Test'
-    };
+        projects: projects
+    }
     this.body = yield render('projects', vm);
 }));
 
