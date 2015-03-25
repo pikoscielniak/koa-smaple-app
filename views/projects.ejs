@@ -1,9 +1,10 @@
 <% include header.ejs %>
-<h3>Projects</h3>
-<ul>
-    <% projects.forEach(function(project){ %>
-    <li><%= project.title %></li>
-    <% }) %>
-</ul>
-
+<h3 class="row">Projects</h3>
+<div class="row">
+    <ul class="col-md-8 col-md-offset-2 list-group">
+        <% projects.forEach(function(project){ %>
+        <li class="list-group-item"><%= project.title %></li>
+        <% }) %>
+    </ul>
+</div>
 <% include footer.ejs %>

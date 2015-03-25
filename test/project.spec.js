@@ -7,7 +7,7 @@ var db = require('../lib/db');
 
 describe('project', function () {
 
-    describe('get /projects', function () {
+    describe('get /', function () {
 
         beforeEach(function (done) {
             co(function *() {
@@ -22,13 +22,30 @@ describe('project', function () {
         });
 
         it('shows all existing projects', function (done) {
-            request.get('/projects')
+            request.get('/')
                 .expect(200)
                 .expect('Content-Type', /html/)
                 .expect(function (res) {
-                    expect(res.text).to.contain('<li>First project</li>');
-                    expect(res.text).to.contain('<li>Second project</li>');
+                    expect(res.text).to.contain('First project');
+                    expect(res.text).to.contain('Second project');
                 })
+                .end(done);
+        });
+    });
+
+    describe('get /add', function () {
+
+        beforeEach(function (done) {
+            co(function *() {
+                var projects = db.projects;
+                yield projects.remove({});
+            }).then(done, done);
+        });
+
+        it('returns form to add project', function (done) {
+            request.get('/add-project')
+                .expect(200)
+                .expect('Content-Type', /html/)
                 .end(done);
         });
     });

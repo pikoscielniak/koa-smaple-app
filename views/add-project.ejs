@@ -1,0 +1,12 @@
+<% include header.ejs %>
+<h3 class="row">Projects</h3>
+<div class="row">
+  <form class="col-md-offset-4 col-md-4" action="/add" method="POST">
+    <div class="form-group">
+        <label for="title">Project Title</label>
+        <input type="text" class="form-control" id="title">
+    </div>
+      <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</div>
+<% include footer.ejs %>

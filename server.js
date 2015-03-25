@@ -18,13 +18,18 @@ app.use(route.get('/api/project', function * () {
     this.body = yield getProjects();
 }));
 
-app.use(route.get('/projects', function *() {
+app.use(route.get('/', function *() {
     var projects = yield db.projects.find({});
     var vm = {
         projects: projects
-    }
+    };
     this.body = yield render('projects', vm);
 }));
+
+app.use(route.get('/add-project', function *() {
+    this.body = yield render('add-project');
+}));
+
 
 
 app.listen(3000);
