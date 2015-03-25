@@ -24,7 +24,7 @@ describe('project', function () {
         it('shows all existing projects', function (done) {
             request.get('/projects')
                 .expect(200)
-                //.expect('Content-Type', /html/)
+                .expect('Content-Type', /html/)
                 .expect(function (res) {
                     expect(res.text).to.contain('<li>First project</li>');
                     expect(res.text).to.contain('<li>Second project</li>');

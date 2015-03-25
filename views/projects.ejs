@@ -1,5 +1,9 @@
+<% include header.ejs %>
+<h3>Projects</h3>
 <ul>
-    <% for( var i = 0; i < projects.length; i++){ %>
-        <li><%= projects[i].title %></li>
-    <% } %>
+    <% projects.forEach(function(project){ %>
+    <li><%= project.title %></li>
+    <% }) %>
 </ul>
+
+<% include footer.ejs %>
