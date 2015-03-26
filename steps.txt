@@ -60,6 +60,11 @@ mkdir public/css
 add bootstrap.css
 commit
 
-npm install ejs --save
-npm install co-views --save
-mkdir views
+npm install jspm -g
+npm install gulp -g
+jspm init (public w folderze)
+npm install gulp gulp-connect --save-dev
+code in gulp file
+jspm install angular --save
+
+

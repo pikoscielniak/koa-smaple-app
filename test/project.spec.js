@@ -5,9 +5,9 @@ var co = require('co');
 
 var db = require('../lib/db');
 
-describe('project', function () {
+describe('project api', function () {
 
-    describe('get /', function () {
+    describe('get /api/project', function () {
 
         beforeEach(function (done) {
             co(function *() {
@@ -21,31 +21,15 @@ describe('project', function () {
             }).then(done, done);
         });
 
-        it('shows all existing projects', function (done) {
-            request.get('/')
+        it('returns all existing projects', function (done) {
+            request.get('/api/project')
                 .expect(200)
-                .expect('Content-Type', /html/)
                 .expect(function (res) {
-                    expect(res.text).to.contain('First project');
-                    expect(res.text).to.contain('Second project');
+                    var projects = res.body;
+                    expect(projects).to.have.length(2);
+                    expect(projects[0].title).to.equal('First project');
+                    expect(projects[1].title).to.equal('Second project');
                 })
-                .end(done);
-        });
-    });
-
-    describe('get /add', function () {
-
-        beforeEach(function (done) {
-            co(function *() {
-                var projects = db.projects;
-                yield projects.remove({});
-            }).then(done, done);
-        });
-
-        it('returns form to add project', function (done) {
-            request.get('/add-project')
-                .expect(200)
-                .expect('Content-Type', /html/)
                 .end(done);
         });
     });
