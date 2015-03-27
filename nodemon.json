@@ -1,0 +1,7 @@
+{
+  "ignore": ["./public/*"],
+  "verbose": true,
+  "execMap": {
+    "js": "node --harmony"
+  }
+}
