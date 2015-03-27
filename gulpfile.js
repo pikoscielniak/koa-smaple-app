@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var connect = require('gulp-connect');
+var mocha = require('gulp-mocha');
 
 // Html task
 gulp.task('html', function () {
@@ -25,6 +26,16 @@ gulp.task('connect', function () {
         root: '.',
         liveReload: true
     }));
+});
+
+
+gulp.task('mocha', function () {
+    gulp.watch(['./lib/*/**.js', './*.js', './test/*.js'], ['runMocha']);
+});
+
+gulp.task('runMocha', function () {
+    return gulp.src('./test/*.js', {read: false})
+        .pipe(mocha({}));
 });
 
 gulp.task('default', ['connect', 'watch']);

@@ -67,4 +67,6 @@ npm install gulp gulp-connect --save-dev
 code in gulp file
 jspm install angular --save
 
+npm install gulp-mocha --save-dev
+node --harmony `which gulp` mocha
 
