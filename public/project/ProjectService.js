@@ -7,7 +7,6 @@ class ProjectService {
 
     getProjects() {
         return this.$http.get('/api/project').then(r =>{
-            debugger;
             return r.data;
         })
     }

@@ -24,14 +24,7 @@
 </head>
 <body ng-app="app" ng-cloak>
 <div class="container">
-    <div ng-controller="ProjectCtrl as vm">
-        <h2>Projects</h2>
-        <div class="row">
-            <ul class="col-md-8 col-md-offset-2 list-group">
-                <li ng-repeat="project in vm.projects" class="list-group-item">{{ project.title}}</li>
-            </ul>
-        </div>
-    </div>
+    <div ui-view></div>
 </div>
 </body>
 </html>
