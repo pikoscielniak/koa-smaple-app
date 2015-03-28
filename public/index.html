@@ -24,6 +24,14 @@
 </head>
 <body ng-app="app" ng-cloak>
 <div class="container">
+    <ul class="nav nav-pills">
+        <li role="presentation" ui-sref-active="active">
+            <a ui-sref="projects">Home</a>
+        </li>
+        <li role="presentation" ui-sref-active="active">
+            <a ui-sref="add-project">Add project</a>
+        </li>
+    </ul>
     <div ui-view></div>
 </div>
 </body>

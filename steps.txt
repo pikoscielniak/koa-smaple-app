@@ -68,7 +68,6 @@ code in gulp file
 jspm install angular --save
 
 npm install nodemon -g
-nodemon --ignore 'lib/*.js'
 added options for nodemon in nodemon.json
 nodemon server.js
 
