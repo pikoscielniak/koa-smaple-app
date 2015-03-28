@@ -4,8 +4,8 @@ var request = require('supertest').agent(app.listen());
 var co = require('co');
 
 var db = require('../lib/db');
-var testProject1 = {name: 'First project', url: 'http://project1.com'};
-var testProject2 = {name: 'First project', url: 'http://project1.com'};
+var testProject1 = {name: 'First project', url: 'http://project1.com', votes: []};
+var testProject2 = {name: 'First project', url: 'http://project1.com', votes: []};
 
 function * addTestProjects() {
     var projects = db.projects;
