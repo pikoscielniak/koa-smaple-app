@@ -7,10 +7,12 @@ function addProjectConfirmCtrl(projectService, $stateParams) {
     function init() {
         debugger
         var url = $stateParams.location;
-        projectService.getProjectForUlr(url)
-            .then(d => {
-                vm.project = d;
-            });
+        if (url) {
+            projectService.getProjectForUlr(url)
+                .then(d => {
+                    vm.project = d;
+                });
+        }
     }
 
     init();

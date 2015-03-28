@@ -7,6 +7,7 @@ function addProjectCtrl(projectService, $state) {
     vm.serverMessage = '';
 
     var addSuccess = (data) => {
+        debugger;
         $state.go('add-project-confirm', {location: data});
     };
 

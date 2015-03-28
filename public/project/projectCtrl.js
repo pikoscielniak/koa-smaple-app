@@ -7,7 +7,6 @@ function projectCtrl(projectService) {
     function init() {
         projectService.getProjects().then(projects => {
             vm.projects = projects;
-            console.log(projects);
         });
     }
 
