@@ -5,11 +5,11 @@
     <form class="col-md-offset-4 col-md-4" action="/add" method="POST">
         <div class="form-group">
             <label for="title">Project Title</label>
-            <input type="text" class="form-control" id="title">
+            <input type="text" class="form-control" id="title" ng-model="newProject.name">
         </div>
         <div class="form-group">
             <label for="url">Project Url</label>
-            <input type="url" class="form-control" id="url">
+            <input type="url" class="form-control" id="url" ng-model="newProject.url">
         </div>
         <button type="submit" class="btn btn-default">Submit</button>
     </form>
