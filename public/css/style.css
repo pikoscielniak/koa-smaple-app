@@ -1,3 +1,11 @@
 [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
     display: none !important;
 }
+
+.list-group-item {
+    border-color: rgb(43, 62, 80)
+}
+
+.badge {
+    background-color: rgb(223, 105, 26);
+}
