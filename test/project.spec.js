@@ -2,19 +2,26 @@ var expect = require('chai').expect;
 var app = require('../server');
 var request = require('supertest').agent(app.listen());
 var co = require('co');
+var _ = require('lodash');
 
 var db = require('../lib/db');
-var testProject1 = {name: 'First project', url: 'http://project1.com', votes: []};
-var testProject2 = {name: 'First project', url: 'http://project1.com', votes: []};
+var testProject1 = {name: 'First project', url: 'http://project1.com'};
+var testProject2 = {name: 'First project', url: 'http://project1.com'};
 
 function * addTestProjects() {
     var projects = db.projects;
+    var votes = db.votes;
     yield projects.remove({});
+    yield votes.remove({});
     var yieldables = [
         projects.insert(testProject1),
         projects.insert(testProject2)
     ];
     var result = yield yieldables;
+    var votesYieldables = _.map(result, function (item) {
+        return votes.insert({projectId: item._id});
+    });
+    yield  votesYieldables;
     return result;
 }
 
@@ -36,8 +43,10 @@ describe('project api', function () {
                     expect(projects).to.have.length(2);
                     expect(projects[0].name).to.equal(testProject1.name);
                     expect(projects[0].url).to.equal(testProject1.url);
+                    expect(projects[0].votes).to.equal(1);
                     expect(projects[1].name).to.equal(testProject1.name);
                     expect(projects[1].url).to.equal(testProject2.url);
+                    expect(projects[1].votes).to.equal(1);
                 })
                 .end(done);
         });

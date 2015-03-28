@@ -80,4 +80,5 @@ added new route to add project
 test
 npm install co-body --save
 
+npm install lodash --save
 

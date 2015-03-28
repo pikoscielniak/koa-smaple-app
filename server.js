@@ -2,7 +2,10 @@ var koa = require('koa');
 var route = require('koa-route');
 var serve = require('koa-static');
 var parse = require('co-body');
+var _ = require('lodash');
+
 var db = require('./lib/db');
+
 
 var app = koa();
 module.exports = app;
@@ -10,7 +13,14 @@ module.exports = app;
 app.use(serve(__dirname + '/public'));
 
 function * getProjects() {
-    return yield db.projects.find({});
+    var projects = yield db.projects.find({});
+    var votes = yield db.votes.find({});
+    _.each(projects, function (project) {
+        project.votes = _.chain(votes).filter(function (vote) {
+            return vote.projectId.toString() === project._id.toString()
+        }).size().value();
+    });
+    return projects;
 }
 
 app.use(route.get('/api/project', function * () {
@@ -18,7 +28,7 @@ app.use(route.get('/api/project', function * () {
 }));
 
 app.use(route.get('/api/project/:id', function * (id) {
-    this.body = yield db.projects.findOne({_id: id});
+    this.body = yield db.projects.findById(id);
 }));
 
 app.use(route.post('/api/project', function * () {
