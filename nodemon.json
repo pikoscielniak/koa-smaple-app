@@ -1,5 +1,8 @@
 {
-  "ignore": ["./public/*"],
+  "ignore": [
+    "public/*",
+    ".idea/*"
+  ],
   "verbose": true,
   "execMap": {
     "js": "node --harmony"

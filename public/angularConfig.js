@@ -10,15 +10,19 @@ function angularConfig($stateProvider, $urlRouterProvider) {
         .state('projects', {
             url: "/projects",
             templateUrl: "project/projectList.html",
-            controller: 'ProjectCtrl as vm'
+            controller: 'projectCtrl as vm'
         })
         .state('add-project', {
             url: "/add-project",
             templateUrl: "project/addProject.html",
-            controller: function ($scope) {
-                $scope.items = ["A", "List", "Of", "Items"];
-            }
+            controller: 'addProjectCtrl as vm'
+        })
+        .state('add-project-confirm', {
+            url: "/add-project-confirm",
+            templateUrl: "project/addProjectConfirm.html",
+            controller: 'addProjectConfirmCtrl as vm'
         });
+
 }
 
 angularConfig.$inject = ['$stateProvider', '$urlRouterProvider'];

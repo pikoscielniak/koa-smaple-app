@@ -1,10 +1,11 @@
 "use strict";
 
-import { ProjectCtrl } from './ProjectCtrl';
-import { ProjectService } from './ProjectService';
+import { projectCtrl } from './projectCtrl';
+import { addProjectCtrl } from './addProjectCtrl';
+import { projectService } from './projectService';
+import { addProjectConfirmCtrl } from './addProjectConfirmCtrl';
 
-let ctrl = ProjectCtrl;
-let service = ProjectService.factory;
-
-export { service }
-export { ctrl }
+export { projectService }
+export { projectCtrl }
+export { addProjectCtrl }
+export { addProjectConfirmCtrl }
