@@ -52,9 +52,9 @@ describe('project api', function () {
             request.post('/api/project')
                 .send(testProject)
                 .expect('Location', /^\/api\/project\/[0-9a-fA-F]{24}$/)
-                .expect(201)
                 .end(function (err, res) {
                     var location = res.header.location;
+                    expect(res.status).to.equal(201);
                     co(function * () {
                         var id = location.match(/[0-9a-fA-F]{24}$/)[0];
                         var projects = yield db.projects.find({_id: id});
@@ -63,7 +63,48 @@ describe('project api', function () {
                         expect(justCreatedProject.url).to.equal(testProject.url);
                     }).then(done, done);
                 });
-            //.end(done);
+        });
+
+        it("not allow project with existing name", function (done) {
+            var existingProject = {
+                name: 'test project',
+                url: 'http://test-project.com'
+            };
+
+            co(function *() {
+                yield db.projects.insert(existingProject);
+                existingProject.name = 'new name';
+                request.post('/api/project')
+                    .send(existingProject)
+                    .end(function (err, res) {
+                        var msg = res.body;
+                        expect(res.status).to.equal(400);
+                        expect(msg.message).to.equal('Project exists');
+                        done()
+                    });
+            });
+        });
+
+
+        it("not allow project with existing url", function (done) {
+            var existingProject = {
+                name: 'test project',
+                url: 'http://test-project.com'
+            };
+
+            co(function *() {
+                yield db.projects.insert(existingProject);
+                existingProject.url = 'http://new-url.com';
+                request.post('/api/project')
+                    .send(existingProject)
+                    .end(function (err, res) {
+                        var msg = res.body;
+                        expect(res.status).to.equal(400);
+                        expect(msg.message).to.equal('Project exists');
+                        done()
+                    });
+            });
         });
     });
-});
+})
+;

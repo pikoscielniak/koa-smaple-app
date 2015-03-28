@@ -19,6 +19,14 @@ app.use(route.get('/api/project', function * () {
 
 app.use(route.post('/api/project', function * () {
     var postedProject = yield parse(this);
+
+    var existingProject = yield db.projects.find({$or: [{name: postedProject.name}, {url: postedProject.url}]});
+    if (existingProject && existingProject.length > 0) {
+        this.body = {message: 'Project exists'};
+        this.status = 400;
+        return;
+    }
+
     var newProject = {
         name: postedProject.name,
         url: postedProject.url
