@@ -5,6 +5,7 @@
     <ul class="col-md-8 col-md-offset-2 list-group">
         <li ng-repeat="project in vm.projects" class="list-group-item">
             <a href="{{project.url}}" target="_blank"><h6>{{ project.name}}</h6></a>
+            <span class="badge">{{project.votes.length}}</span>
         </li>
     </ul>
 </div>
