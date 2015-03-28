@@ -17,6 +17,10 @@ app.use(route.get('/api/project', function * () {
     this.body = yield getProjects();
 }));
 
+app.use(route.get('/api/project/:id', function * (id) {
+    this.body = yield db.projects.findOne({_id: id});
+}));
+
 app.use(route.post('/api/project', function * () {
     var postedProject = yield parse(this);
 

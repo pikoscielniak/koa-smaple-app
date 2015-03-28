@@ -106,5 +106,32 @@ describe('project api', function () {
             });
         });
     });
-})
-;
+
+    describe('get /api/project/:id', function () {
+
+        var insertedProjects;
+
+        beforeEach(function (done) {
+            co(function *() {
+                var projects = db.projects;
+                yield projects.remove({});
+                var yieldables = [
+                    projects.insert({name: 'First project', url: 'http://project1.com'}),
+                    projects.insert({name: 'Second project', url: 'http://project2.com'})
+                ];
+                insertedProjects = yield yieldables;
+            }).then(done, done);
+        });
+
+        it('returns project by id', function (done) {
+            request.get('/api/project/' + insertedProjects[0]._id)
+                .expect(200)
+                .expect(function (res) {
+                    var project = res.body;
+                    expect(project.name).to.equal('First project');
+                    expect(project.url).to.equal('http://project1.com');
+                })
+                .end(done);
+        });
+    });
+});
