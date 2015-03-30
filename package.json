@@ -4,14 +4,13 @@
   "description": "A learning project",
   "main": "index.js",
   "scripts": {
-    "test": "node node_modules/.bin/mocha --harmony",
+    "test": "node node_modules/.bin/mocha --harmony --recursive",
     "start": "node --harmony server.js"
   },
   "author": "piotrekbass",
   "license": "ISC",
   "devDependencies": {
     "chai": "^2.1.2",
-    "co": "^4.4.0",
     "gulp": "^3.8.11",
     "gulp-connect": "^2.2.0",
     "gulp-mocha": "^2.0.0",
@@ -19,11 +18,14 @@
     "supertest": "^0.15.0"
   },
   "dependencies": {
+    "bcrypt": "^0.8.2",
+    "co": "^4.4.0",
     "co-body": "^1.1.0",
     "co-monk": "^1.0.0",
     "co-views": "^0.3.0",
     "ejs": "^2.3.1",
     "koa": "^0.18.1",
+    "koa-passport": "^1.1.5",
     "koa-route": "^2.4.0",
     "koa-static": "^1.4.9",
     "lodash": "^3.6.0",
