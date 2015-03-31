@@ -25,11 +25,14 @@
     "co-views": "^0.3.0",
     "ejs": "^2.3.1",
     "koa": "^0.18.1",
+    "koa-jwt": "^0.1.8",
     "koa-passport": "^1.1.5",
     "koa-route": "^2.4.0",
     "koa-static": "^1.4.9",
     "lodash": "^3.6.0",
-    "monk": "^1.0.0"
+    "moment": "^2.9.0",
+    "monk": "^1.0.0",
+    "passport-local": "^1.0.0"
   },
   "jspm": {
     "directories": {
