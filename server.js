@@ -5,6 +5,7 @@ var parse = require('co-body');
 var passport = require('koa-passport');
 var jwt = require('koa-jwt');
 var moment = require('moment');
+var project = require('./lib/project');
 
 var localStrategy = require('./lib/auth/localStrategy');
 
@@ -35,7 +36,7 @@ function * authHandler() {
     var token = jwt.encode(payload, 'tempquickkey');
 
     this.body = {
-        user: user.toJSON(),
+        user: this.request.user,
         token: token
     };
 }
@@ -45,20 +46,8 @@ app.use(route.post('/login', passport.authenticate('local-login'), authHandler))
 
 app.use(serve(__dirname + '/public'));
 
-function * getProjects() {
-    var projects = yield db.projects.find({});
-    var votes = yield db.votes.find({});
-    _.each(projects, function (project) {
-        project.votes = _.chain(votes).filter(function (vote) {
-            return vote.projectId.toString() === project._id.toString()
-        }).size().value();
-    });
-    return projects;
-}
 
-app.use(route.get('/api/project', function * () {
-    this.body = yield getProjects();
-}));
+app.use(route.get('/api/project', project.getAll));
 
 app.use(route.get('/api/project/:id', function * (id) {
     this.body = yield db.projects.findById(id);
