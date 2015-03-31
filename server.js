@@ -1,7 +1,6 @@
 var koa = require('koa');
 var route = require('koa-route');
 var serve = require('koa-static');
-var parse = require('co-body');
 var passport = require('koa-passport');
 var jwt = require('koa-jwt');
 var moment = require('moment');
@@ -51,25 +50,7 @@ app.use(route.get('/api/project', project.getAll));
 
 app.use(route.get('/api/project/:id', project.getById));
 
-app.use(route.post('/api/project', function * () {
-    var postedProject = yield parse(this);
-
-    var existingProject = yield db.projects.find({$or: [{name: postedProject.name}, {url: postedProject.url}]});
-    if (existingProject && existingProject.length > 0) {
-        this.body = {message: 'Project exists'};
-        this.status = 400;
-        return;
-    }
-
-    var newProject = {
-        name: postedProject.name,
-        url: postedProject.url
-    };
-
-    var savedProject = yield db.projects.insert(newProject);
-    this.set('Location', '/api/project/' + savedProject._id);
-    this.status = 201;
-}));
+app.use(route.post('/api/project', project.post));
 
 
 app.listen(3000);
