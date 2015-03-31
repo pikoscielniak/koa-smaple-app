@@ -16,6 +16,7 @@ var app = koa();
 module.exports = app;
 
 app.use(passport.initialize());
+
 passport.serializeUser(function (user, done) {
     done(null, user);
 });
@@ -39,7 +40,7 @@ function * authHandler() {
         token: token
     };
 }
-
+//TODO find out use with two middlewares or use koa-router
 app.use(route.post('/register', passport.authenticate('local-register'), authHandler));
 app.use(route.post('/login', passport.authenticate('local-login'), authHandler));
 
@@ -47,9 +48,7 @@ app.use(serve(__dirname + '/public'));
 
 
 app.use(route.get('/api/project', project.getAll));
-
 app.use(route.get('/api/project/:id', project.getById));
-
 app.use(route.post('/api/project', project.post));
 
 

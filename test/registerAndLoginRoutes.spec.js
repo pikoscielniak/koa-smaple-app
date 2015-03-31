@@ -14,14 +14,13 @@ describe('register and login', function () {
     });
 
     describe(registerUrl, function () {
-        it("creates user and returns token", function (done) {
+        it.only("creates user and returns token", function (done) {
             var user = {
                 email: 'test@test.pl',
                 password: 'test'
             };
             request.post(registerUrl)
                 .send(user)
-
                 .end(function (err, res) {
                     expect(res.status).to.equal(200);
                     expect(res.body).to.have.length.above(20);
