@@ -49,9 +49,7 @@ app.use(serve(__dirname + '/public'));
 
 app.use(route.get('/api/project', project.getAll));
 
-app.use(route.get('/api/project/:id', function * (id) {
-    this.body = yield db.projects.findById(id);
-}));
+app.use(route.get('/api/project/:id', project.getById));
 
 app.use(route.post('/api/project', function * () {
     var postedProject = yield parse(this);
