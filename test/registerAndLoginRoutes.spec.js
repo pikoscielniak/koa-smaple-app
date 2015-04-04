@@ -23,7 +23,9 @@ describe('register and login', function () {
                 .send(user)
                 .end(function (err, res) {
                     expect(res.status).to.equal(200);
-                    expect(res.body).to.have.length.above(20);
+                    var user = res.body.user;
+                    var token = res.body.token;
+                    expect(token).to.have.length.above(20);
                     co(function * () {
                         var savedUser = yield db.users.findOne({email: user.email});
                         expect(savedUser.email).to.equal(user.email);
