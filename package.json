@@ -27,7 +27,7 @@
     "koa": "^0.18.1",
     "koa-jwt": "^0.1.8",
     "koa-passport": "^1.1.5",
-    "koa-route": "^2.4.0",
+    "koa-router": "^4.3.2",
     "koa-static": "^1.4.9",
     "lodash": "^3.6.0",
     "moment": "^2.9.0",

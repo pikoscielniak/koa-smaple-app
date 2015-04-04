@@ -1,5 +1,5 @@
 var koa = require('koa');
-var route = require('koa-route');
+var router = require('koa-router')();
 var serve = require('koa-static');
 var passport = require('koa-passport');
 var jwt = require('koa-jwt');
@@ -27,6 +27,7 @@ passport.use('local-register', localStrategy.registerStrategy);
 passport.use('local-login', localStrategy.loginStrategy);
 
 function * authHandler() {
+    debugger;
     var payload = {
         iss: this.hostname,
         sub: this.request.user._id,
@@ -40,17 +41,17 @@ function * authHandler() {
         token: token
     };
 }
-//TODO find out use with two middlewares or use koa-router
-app.use(route.post('/register', passport.authenticate('local-register'), authHandler));
-app.use(route.post('/login', passport.authenticate('local-login'), authHandler));
+router.post('/register', passport.authenticate('local-register'), authHandler)
+router.post('/login', passport.authenticate('local-login'), authHandler)
 
 app.use(serve(__dirname + '/public'));
 
+router.get('/api/project', project.getAll);
+router.get('/api/project/:id', project.getById);
+router.post('/api/project', project.post);
 
-app.use(route.get('/api/project', project.getAll));
-app.use(route.get('/api/project/:id', project.getById));
-app.use(route.post('/api/project', project.post));
-
+app.use(router.routes())
+app.use(router.allowedMethods());
 
 app.listen(3000);
 console.log("Working...");

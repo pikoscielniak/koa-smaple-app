@@ -14,7 +14,7 @@ describe('register and login', function () {
     });
 
     describe(registerUrl, function () {
-        it.only("creates user and returns token", function (done) {
+        it("creates user and returns token", function (done) {
             var user = {
                 email: 'test@test.pl',
                 password: 'test'
