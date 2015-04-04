@@ -2,11 +2,17 @@ var expect = require('chai').expect;
 var app = require('../server');
 var request = require('supertest').agent(app.listen());
 var co = require('co');
+var tokenManager = require('../lib/auth/tokenManager');
 
 var db = require('../lib/db');
 var registerUrl = '/register';
 
 describe('register and login', function () {
+    var user = {
+        email: 'test@test.pl',
+        password: 'test'
+    };
+
     beforeEach(function (done) {
         co(function *() {
             yield db.users.remove({});
@@ -15,10 +21,7 @@ describe('register and login', function () {
 
     describe(registerUrl, function () {
         it("creates user and returns token", function (done) {
-            var user = {
-                email: 'test@test.pl',
-                password: 'test'
-            };
+
             request.post(registerUrl)
                 .send(user)
                 .end(function (err, res) {
@@ -30,11 +33,21 @@ describe('register and login', function () {
                         var savedUser = yield db.users.findOne({email: user.email});
                         expect(savedUser.email).to.equal(user.email);
                     }).then(done, done);
-                })
+                });
         });
 
         it('token has valid data', function (done) {
-            done();
+            request.post(registerUrl)
+                .send(user)
+                .end(function (err, res) {
+                    var token = res.body.token;
+                    co(function * () {
+                        var decodedToken = tokenManager.decodeJwtToken(token);
+                        var sub = decodedToken.sub;
+                        var savedUser = yield db.users.findOne({email: user.email});
+                        expect(sub).to.equal(savedUser._id.toString());
+                    }).then(done, done);
+                });
         });
     });
 });
