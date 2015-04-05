@@ -2,7 +2,7 @@ var expect = require('chai').expect;
 var app = require('../server');
 var request = require('supertest').agent(app.listen());
 var co = require('co');
-var tokenManager = require('../lib/auth/tokenManager');
+var tokenService = require('../lib/auth/jwtTokenService');
 
 var db = require('../lib/db');
 var registerUrl = '/register';
@@ -42,7 +42,7 @@ describe(registerUrl, function () {
             .end(function (err, res) {
                 var token = res.body.token;
                 co(function * () {
-                    var decodedToken = tokenManager.decodeJwtToken(token);
+                    var decodedToken = tokenService.decodeJwtToken(token);
                     var sub = decodedToken.sub;
                     var savedUser = yield db.users.findOne({email: testUser.email});
                     expect(sub).to.equal(savedUser._id.toString());

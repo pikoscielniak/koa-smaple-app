@@ -53,15 +53,35 @@ describe('project api', function () {
     });
 
     describe('post /api/project', function () {
+        var testUser = {
+            email: 'test@test.pl',
+            password: 'test'
+        };
+        var token;
+
+        function registerUser(user) {
+            return new Promise(function (resolve, reject) {
+                request.post('/register')
+                    .send(user)
+                    .end(function (err, res) {
+                        if (err) return reject(err);
+                        resolve(res.body.token);
+                    });
+            });
+        }
+
         beforeEach(function (done) {
             co(function *() {
                 var projects = db.projects;
                 yield projects.remove({});
+                yield db.users.remove({});
+                token = yield registerUser(testUser);
             }).then(done, done);
         });
 
         it("adds new projects", function (done) {
             request.post('/api/project')
+                .set('Authorization', 'Bearer ' + token)
                 .send(testProject1)
                 .expect('Location', /^\/api\/project\/[0-9a-fA-F]{24}$/)
                 .end(function (err, res) {
@@ -84,6 +104,7 @@ describe('project api', function () {
                 yield db.projects.insert(existingProject);
                 existingProject.name = 'new name';
                 request.post('/api/project')
+                    .set('Authorization', 'Bearer ' + token)
                     .send(existingProject)
                     .end(function (err, res) {
                         var msg = res.body;
@@ -102,6 +123,7 @@ describe('project api', function () {
                 yield db.projects.insert(existingProject);
                 existingProject.url = 'http://new-url.com';
                 request.post('/api/project')
+                    .set('Authorization', 'Bearer ' + token)
                     .send(existingProject)
                     .end(function (err, res) {
                         var msg = res.body;
