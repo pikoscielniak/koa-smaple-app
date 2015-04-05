@@ -17,12 +17,6 @@ function angularConfig($stateProvider, $urlRouterProvider) {
             templateUrl: "project/addProject.html",
             controller: 'addProjectCtrl as vm'
         })
-        .state('add-project-confirm', {
-            url: "/add-project-confirm",
-            templateUrl: "project/addProjectConfirm.html",
-            params: {location: null},
-            controller: 'addProjectConfirmCtrl as vm'
-        })
         .state('register', {
             url: '/register',
             templateUrl: '/auth/register.html',

@@ -1,18 +1,21 @@
 "use strict";
 
-function addProjectCtrl(projectService, $state) {
+function addProjectCtrl(projectService, $state, alertService) {
 
     var vm = this;
     vm.project = {};
     vm.serverMessage = '';
 
-    var addSuccess = (data) => {
-        debugger;
-        $state.go('add-project-confirm', {location: data});
+    var addSuccess = (projectUrl) => {
+        projectService.getProjectByUlr(projectUrl)
+            .then((project) => {
+                var msg = `The project ${project.name} was added`;
+                alertService.show('success', 'Confirmation', msg);
+                $state.go('projects');
+            });
     };
 
     var addFail = (response) => {
-        debugger;
         vm.serverMessage = response.data.message;
     };
 
@@ -23,6 +26,6 @@ function addProjectCtrl(projectService, $state) {
     };
 }
 
-addProjectCtrl.$inject = ['projectService', '$state'];
+addProjectCtrl.$inject = ['projectService', '$state', 'alertService'];
 
 export { addProjectCtrl }

@@ -21,14 +21,14 @@ function projectService($http) {
             });
     }
 
-    function getProjectForUlr(url) {
+    function getProjectByUlr(url) {
         return $http.get(url).then(successCallback, failCallback);
     }
 
     return {
         getProjects: getProjects,
         addProject: addProject,
-        getProjectForUlr: getProjectForUlr
+        getProjectByUlr: getProjectByUlr
     }
 }
 
