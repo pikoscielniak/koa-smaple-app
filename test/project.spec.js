@@ -85,8 +85,8 @@ describe('project api', function () {
                 .send(testProject1)
                 .expect('Location', /^\/api\/project\/[0-9a-fA-F]{24}$/)
                 .end(function (err, res) {
-                    var location = res.header.location;
                     expect(res.status).to.equal(201);
+                    var location = res.header.location;
                     co(function * () {
                         var id = location.match(/[0-9a-fA-F]{24}$/)[0];
                         var projects = yield db.projects.find({_id: id});
