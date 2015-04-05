@@ -23,9 +23,20 @@ function authService($http, authTokenService, $state) {
         }).success(authSuccessful);
     }
 
+    function logout() {
+        authTokenService.removeToken();
+    }
+
+    function isAuthenticated() {
+        return authTokenService.isAuthenticated();
+    }
+
     return {
         login: login,
-        register: register
+        register: register,
+        logout: logout,
+        isAuthenticated: isAuthenticated
+
     }
 }
 

@@ -7,6 +7,7 @@ function loginCtrl(alertService, authService) {
     vm.password = '';
 
     vm.submit = function (email, password) {
+        debugger;
         authService.login(email, password).then(function (res) {
             var message = 'Thanks for coming back ' + res.data.user.email + '!';
             alertService.show('success', 'Welcome', message);

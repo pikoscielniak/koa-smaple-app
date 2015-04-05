@@ -32,6 +32,10 @@ function angularConfig($stateProvider, $urlRouterProvider) {
             url: '/login',
             templateUrl: '/auth/login.html',
             controller: 'loginCtrl as vm'
+        })
+        .state('logout', {
+            url: '/logout',
+            controller: 'logoutCtrl'
         });
 
 }

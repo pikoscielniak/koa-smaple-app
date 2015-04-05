@@ -1,8 +1,8 @@
 "use strict";
 
-function headerCtrl(authTokenService) {
+function headerCtrl(authService) {
     var vm = this;
-    vm.isAuthenticated = authTokenService.isAuthenticated();
+    vm.isAuthenticated = authService.isAuthenticated;
 }
 
 headerCtrl.$inject = ['authTokenService'];

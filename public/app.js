@@ -18,6 +18,7 @@ angular.module('app', ['ui.router', 'ngMessages'])
     .factory('authService', authModule.authService)
     .factory('authTokenService', authModule.authTokenService)
     .controller('loginCtrl', authModule.loginCtrl)
-    .controller('registerCtrl', authModule.registerCtrl);
+    .controller('registerCtrl', authModule.registerCtrl)
+    .controller('logoutCtrl', authModule.logoutCtrl);
 
 
