@@ -1,0 +1,14 @@
+<div ng-controller="headerCtrl as vm" class="header">
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container" ng-cloak>
+            <div class="collapse navbar-collapse" id="js-navbar-collapse">
+                <ul class="nav navbar-nav">
+                    <li ui-sref-active="active"><a ui-sref="projects">Home</a></li>
+                    <li ng-show="vm.isAuthenticated()" ui-sref-active="active"><a ui-sref="add-project">Add project</a></li>
+                    <li ng-hide="vm.isAuthenticated()" ui-sref-active="active"><a ui-sref="login">Login</a></li>
+                    <li ng-show="vm.isAuthenticated()" ui-sref="logout" ui-sref-active="active"><a ui-sref="register">Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

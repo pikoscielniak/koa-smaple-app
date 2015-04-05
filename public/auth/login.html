@@ -1,0 +1,13 @@
+<form ng-submit="vm.submit(vm.email,vm.passowrd)" name="register" class="form-signin" novalidate>
+    <h1 class="form-signin-heading text-muted">Login</h1>
+    <input name="email" type="email" ng-model="vm.email " class="form-control" placeholder="Email address" required
+           autofocus>
+
+    <p class="help-block" ng-show="register.email.$dirty && register.email.$invalid">Please enter a proper email.</p>
+    <input name="password" type="password" ng-model="vm.password" class="form-control" placeholder="Password" required>
+    <button ng-disabled="registry.$invalid" class="btn btn-lg btn-primary btn-block" type="submit">
+        Login
+    </button>
+    <br/>
+    <a class="text-muted pull-right" ui-sref="register">Create account</a>
+</form>

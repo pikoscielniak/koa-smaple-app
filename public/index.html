@@ -23,16 +23,20 @@
     <![endif]-->
 </head>
 <body ng-app="app" ng-cloak>
-<div class="container">
-    <ul class="nav nav-pills">
-        <li role="presentation" ui-sref-active="active">
-            <a ui-sref="projects">Home</a>
-        </li>
-        <li role="presentation" ui-sref-active="active">
-            <a ui-sref="add-project">Add project</a>
-        </li>
-    </ul>
-    <div ui-view></div>
-</div>
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+
+    <div ng-include="'/infrastructure/alert.html'"></div>
+
+    <div class="container">
+        <div ng-include="'/infrastructure/header.html'"></div>
+        <div class="row">
+            <div class="ui-view-container">
+                <div ui-view></div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
