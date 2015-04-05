@@ -9,7 +9,7 @@ var app = koa();
 module.exports = app;
 
 router.post('/register', authService.register);
-router.post('/login', authService.register);
+router.post('/login', authService.login);
 
 app.use(serve(__dirname + '/public'));
 
