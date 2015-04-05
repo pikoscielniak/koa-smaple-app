@@ -42,4 +42,28 @@ describe(loginUrl, function () {
                 }).then(done, done);
             });
     });
+
+    it('when email is wrong return 400', function (done) {
+        testUser.email = 'wrong@email.com';
+        request.post(loginUrl)
+            .send(testUser)
+            .end(function (err, res) {
+                expect(res.status).to.equal(400);
+                var msg = res.body.message;
+                expect(msg).to.equals('Email or password incorrect');
+                done();
+            });
+    });
+
+    it('when password is wrong return 400', function (done) {
+        testUser.password = 'wrongPassword';
+        request.post(loginUrl)
+            .send(testUser)
+            .end(function (err, res) {
+                expect(res.status).to.equal(400);
+                var msg = res.body.message;
+                expect(msg).to.equals('Email or password incorrect');
+                done();
+            });
+    });
 });
