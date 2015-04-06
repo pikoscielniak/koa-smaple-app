@@ -65,4 +65,16 @@ describe.only('voting', function () {
                 }).then(done, done);
             });
     });
+
+    it("cannot vote on your own project", function (done) {
+        request.post('/api/vote')
+            .send({projectId: projectId})
+            .set('Authorization', 'Bearer ' + authorToken)
+            .end(function (err, res) {
+                if (err) return done(err);
+                expect(res.status).to.equal(400);
+                expect(res.body.message).to.equal('Can not vote on your own project');
+                done();
+            });
+    });
 });
