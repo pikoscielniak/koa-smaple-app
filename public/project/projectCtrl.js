@@ -1,9 +1,10 @@
 "use strict";
 
-function projectCtrl(projectService, authService, voteService, alertService) {
+function projectCtrl(projectService, authService, voteService, alertService, socketService) {
 
     var vm = this;
     vm.canVote = authService.isAuthenticated();
+    socketService.setRefreshHandler(init);
 
     function init() {
         projectService.getProjects().then(projects => {
@@ -24,9 +25,10 @@ function projectCtrl(projectService, authService, voteService, alertService) {
         return !!vm.userVote;
     };
 
-    function addVoteSuccess(res) {
-        vm.userVote = res.data;
+    function addVoteSuccess() {
+        init();
         alertService.show('success', 'Vote added', 'Thank you for your vote.');
+        socketService.emitVoteAdded();
     }
 
     function vote(project) {
@@ -38,6 +40,6 @@ function projectCtrl(projectService, authService, voteService, alertService) {
     init();
 }
 
-projectCtrl.$inject = ['projectService', 'authService', 'voteService', 'alertService'];
+projectCtrl.$inject = ['projectService', 'authService', 'voteService', 'alertService', 'socketService'];
 
 export { projectCtrl }

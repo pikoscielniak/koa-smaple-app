@@ -28,15 +28,16 @@
     your browser</a> to improve your experience.</p>
 <![endif]-->
 
-    <div ng-include="'/infrastructure/alert.html'"></div>
+<div ng-include="'/infrastructure/alert.html'"></div>
 
-    <div class="container">
-        <div ng-include="'/infrastructure/header.html'"></div>
-        <div class="row">
-            <div class="ui-view-container">
-                <div ui-view></div>
-            </div>
+<div class="container">
+    <div ng-include="'/infrastructure/header.html'"></div>
+    <div class="row">
+        <div class="ui-view-container">
+            <div ui-view></div>
         </div>
     </div>
+</div>
+<script src="/socket.io/socket.io.js"></script>
 </body>
 </html>

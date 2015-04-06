@@ -1,12 +1,13 @@
 "use strict";
 
-function addProjectCtrl(projectService, $state, alertService) {
+function addProjectCtrl(projectService, $state, alertService, socketService) {
 
     var vm = this;
     vm.project = {};
     vm.serverMessage = '';
 
     var addSuccess = (projectUrl) => {
+        socketService.emitProjectAdded();
         projectService.getProjectByUlr(projectUrl)
             .then((project) => {
                 var msg = `The project ${project.name} was added`;
@@ -26,6 +27,6 @@ function addProjectCtrl(projectService, $state, alertService) {
     };
 }
 
-addProjectCtrl.$inject = ['projectService', '$state', 'alertService'];
+addProjectCtrl.$inject = ['projectService', '$state', 'alertService', 'socketService'];
 
 export { addProjectCtrl }
