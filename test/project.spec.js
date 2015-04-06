@@ -3,10 +3,11 @@ var app = require('../server');
 var request = require('supertest').agent(app.listen());
 var co = require('co');
 var _ = require('lodash');
+var jwtTokenService = require('../lib/auth/jwtTokenService');
 
 var db = require('../lib/db');
-var testProject1 = {name: 'First project', url: 'http://project1.com'};
-var testProject2 = {name: 'First project', url: 'http://project1.com'};
+var testProject1 = {name: 'First project', url: 'http://project1.com', authorId: '4d3ed089fb60ab534684b7ff'};
+var testProject2 = {name: 'First project', url: 'http://project1.com', authorId: '4d3ed089fb60ab534684b7ff'};
 
 function * addTestProjects() {
     var projects = db.projects;
@@ -25,7 +26,7 @@ function * addTestProjects() {
     return result;
 }
 
-describe('project api', function () {
+describe.only('project api', function () {
 
     describe('get /api/project', function () {
 
@@ -44,9 +45,11 @@ describe('project api', function () {
                     expect(projects[0].name).to.equal(testProject1.name);
                     expect(projects[0].url).to.equal(testProject1.url);
                     expect(projects[0].votes).to.equal(1);
+                    expect(projects[0].authorId).to.ok;
                     expect(projects[1].name).to.equal(testProject1.name);
                     expect(projects[1].url).to.equal(testProject2.url);
                     expect(projects[1].votes).to.equal(1);
+                    expect(projects[1].authorId).to.ok;
                 })
                 .end(done);
         });
@@ -58,6 +61,7 @@ describe('project api', function () {
             password: 'test'
         };
         var token;
+        var parsedToken;
 
         function registerUser(user) {
             return new Promise(function (resolve, reject) {
@@ -76,6 +80,7 @@ describe('project api', function () {
                 yield projects.remove({});
                 yield db.users.remove({});
                 token = yield registerUser(testUser);
+                parsedToken = jwtTokenService.decodeJwtToken(token);
             }).then(done, done);
         });
 
@@ -93,6 +98,7 @@ describe('project api', function () {
                         var justCreatedProject = projects[0];
                         expect(justCreatedProject.name).to.equal(testProject1.name);
                         expect(justCreatedProject.url).to.equal(testProject1.url);
+                        expect(justCreatedProject.authorId).to.equal(parsedToken.sub);
                     }).then(done, done);
                 });
         });
