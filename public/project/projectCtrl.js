@@ -1,8 +1,9 @@
 "use strict";
 
-function projectCtrl(projectService) {
+function projectCtrl(projectService, authService, userVote) {
 
     var vm = this;
+    vm.canVote = authService.isAuthenticated();
 
     function init() {
         projectService.getProjects().then(projects => {
@@ -10,9 +11,15 @@ function projectCtrl(projectService) {
         });
     }
 
+
+
+    function vote(project) {
+
+    }
+
     init();
 }
 
-projectCtrl.$inject = ['projectService'];
+projectCtrl.$inject = ['projectService', 'authService'];
 
 export { projectCtrl }

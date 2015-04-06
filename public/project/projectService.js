@@ -17,12 +17,16 @@ function projectService($http) {
 
     function addProject(project) {
         return $http.post(url, project).then(r => {
-                return r.headers('Location');
-            });
+            return r.headers('Location');
+        });
     }
 
     function getProjectByUlr(url) {
         return $http.get(url).then(successCallback, failCallback);
+    }
+
+    function getMyVote() {
+        return $http.get(url + '/vote');
     }
 
     return {
