@@ -20,6 +20,7 @@ router.get('/api/project/:id', project.getById);
 router.post('/api/project', authorize, project.post);
 
 router.post('/api/vote', authorize, vote.addVote);
+router.get('/api/vote', authorize, vote.getVote);
 
 app.use(router.routes());
 app.use(router.allowedMethods());
