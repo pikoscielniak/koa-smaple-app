@@ -6,7 +6,7 @@ var db = require('../lib/db');
 var testHelpers = require('./testHelpers');
 var jwtTokenService = require('../lib/auth/jwtTokenService');
 
-describe.only('voting', function () {
+describe('voting', function () {
 
     var testUser1 = {
         email: 'test@test.pl',
@@ -76,5 +76,32 @@ describe.only('voting', function () {
                 expect(res.body.message).to.equal('Can not vote on your own project');
                 done();
             });
+    });
+
+    function voteOnProject(projectId, token) {
+        return new Promise(function (resolve, reject) {
+            request.post('/api/vote')
+                .send({projectId: projectId})
+                .set('Authorization', 'Bearer ' + token)
+                .end(function (err, res) {
+                    if (err) return reject(err);
+                    resolve(res);
+                });
+        });
+    }
+
+    it("can vote only once for one project", function (done) {
+        co(function * () {
+            yield voteOnProject(projectId, voterToken);
+        }).then(function () {
+            request.post('/api/vote')
+                .send({projectId: projectId})
+                .set('Authorization', 'Bearer ' + voterToken)
+                .end(function (err, res) {
+                    expect(res.status).to.equal(400);
+                    expect(res.body.message).to.equal('Can not vote again on the same project');
+                    done();
+                });
+        }, done);
     });
 });
