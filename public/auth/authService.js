@@ -12,7 +12,6 @@ function authService($http, authTokenService, $state) {
     }
 
     function authSuccessful(res) {
-        debugger;
         authTokenService.setToken(res.token);
         $state.go('projects');
     }

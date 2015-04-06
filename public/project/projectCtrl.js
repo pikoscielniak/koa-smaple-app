@@ -9,8 +9,10 @@ function projectCtrl(projectService, authService, voteService, alertService) {
         projectService.getProjects().then(projects => {
             vm.projects = projects;
         });
-        voteService.getVote()
-            .then((vote)=> vm.userVote = vote);
+        if (authService.isAuthenticated()) {
+            voteService.getVote()
+                .then((vote)=> vm.userVote = vote);
+        }
     }
 
     function addVoteFail(res) {
@@ -18,9 +20,13 @@ function projectCtrl(projectService, authService, voteService, alertService) {
         alertService.show('warning', 'Opps!', msg + '!');
     }
 
-    function addVoteSuccess(res, a, b, c) {
-        debugger;
-        //TODO add user vote vm.userVote
+    vm.voteDisabled = function () {
+        return !!vm.userVote;
+    };
+
+    function addVoteSuccess(res) {
+        vm.userVote = res.data;
+        alertService.show('success', 'Vote added', 'Thank you for your vote.');
     }
 
     function vote(project) {

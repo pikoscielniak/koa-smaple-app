@@ -3,10 +3,11 @@
 </div>
 <div class="row">
     <div class="col-md-8 col-md-offset-2 list-group">
-        <div ng-repeat="project in vm.projects | orderBy:'votes'" class="list-group-item">
+        <div ng-repeat="project in vm.projects | orderBy:'-votes'" class="list-group-item">
             <span class="pull-right">
             <span class="badge">{{project.votes}}</span>
-                <button ng-click="vm.vote(project)" type="button" class="btn btn-default btn-xs" ng-show="vm.canVote">
+                <button ng-click="vm.vote(project)" type="button" class="btn btn-default btn-xs"
+                        ng-show="vm.canVote" ng-disabled="vm.voteDisabled()">
                 <span class="glyphicon glyphicon-star" aria-hidden="true">
                 </span>Vote
                 </button>
