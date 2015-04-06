@@ -25,10 +25,6 @@ function projectService($http) {
         return $http.get(url).then(successCallback, failCallback);
     }
 
-    function getMyVote() {
-        return $http.get(url + '/vote');
-    }
-
     return {
         getProjects: getProjects,
         addProject: addProject,

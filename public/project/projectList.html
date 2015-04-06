@@ -6,7 +6,7 @@
         <div ng-repeat="project in vm.projects | orderBy:'votes'" class="list-group-item">
             <span class="pull-right">
             <span class="badge">{{project.votes}}</span>
-                <button type="button" class="btn btn-default btn-xs" ng-show="vm.canVote">
+                <button ng-click="vm.vote(project)" type="button" class="btn btn-default btn-xs" ng-show="vm.canVote">
                 <span class="glyphicon glyphicon-star" aria-hidden="true">
                 </span>Vote
                 </button>

@@ -1,11 +1,9 @@
 "use strict";
 
-function angularConfig($stateProvider, $urlRouterProvider) {
-    //
-    // For any unmatched url, redirect to /state1
+function angularConfig($stateProvider, $urlRouterProvider, $httpProvider) {
+
     $urlRouterProvider.otherwise("/projects");
-    //
-    // Now set up the states
+
     $stateProvider
         .state('projects', {
             url: "/projects",
@@ -31,9 +29,9 @@ function angularConfig($stateProvider, $urlRouterProvider) {
             url: '/logout',
             controller: 'logoutCtrl'
         });
-
+    $httpProvider.interceptors.push('authInterceptor');
 }
 
-angularConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
+angularConfig.$inject = ['$stateProvider', '$urlRouterProvider', '$httpProvider'];
 
 export default angularConfig

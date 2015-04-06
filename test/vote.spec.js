@@ -101,14 +101,14 @@ describe('/api/vote', function () {
                     .set('Authorization', 'Bearer ' + voterToken)
                     .end(function (err, res) {
                         expect(res.status).to.equal(400);
-                        expect(res.body.message).to.equal('Can not vote again on the same project');
+                        expect(res.body.message).to.equal('Can not vote again');
                         done();
                     });
             }, done);
         });
     });
 
-    describe.only('get', function () {
+    describe('get', function () {
 
         it("returns current user vote if exists", function (done) {
             co(function * () {
