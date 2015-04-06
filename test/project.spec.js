@@ -3,17 +3,20 @@ var app = require('../server');
 var request = require('supertest').agent(app.listen());
 var co = require('co');
 var _ = require('lodash');
-var jwtTokenService = require('../lib/auth/jwtTokenService');
 
+var jwtTokenService = require('../lib/auth/jwtTokenService');
 var db = require('../lib/db');
+var testHelpers = require('./testHelpers');
+
 var testProject1 = {name: 'First project', url: 'http://project1.com', authorId: '4d3ed089fb60ab534684b7ff'};
 var testProject2 = {name: 'First project', url: 'http://project1.com', authorId: '4d3ed089fb60ab534684b7ff'};
 
 function * addTestProjects() {
     var projects = db.projects;
     var votes = db.votes;
-    yield projects.remove({});
-    yield votes.remove({});
+
+    yield testHelpers.clearEnvironment();
+
     var yieldables = [
         projects.insert(testProject1),
         projects.insert(testProject2)
@@ -26,7 +29,7 @@ function * addTestProjects() {
     return result;
 }
 
-describe.only('project api', function () {
+describe('project api', function () {
 
     describe('get /api/project', function () {
 
@@ -63,23 +66,11 @@ describe.only('project api', function () {
         var token;
         var parsedToken;
 
-        function registerUser(user) {
-            return new Promise(function (resolve, reject) {
-                request.post('/register')
-                    .send(user)
-                    .end(function (err, res) {
-                        if (err) return reject(err);
-                        resolve(res.body.token);
-                    });
-            });
-        }
-
         beforeEach(function (done) {
             co(function *() {
                 var projects = db.projects;
-                yield projects.remove({});
-                yield db.users.remove({});
-                token = yield registerUser(testUser);
+                yield testHelpers.clearEnvironment();
+                token = yield testHelpers.registerUser(request, testUser);
                 parsedToken = jwtTokenService.decodeJwtToken(token);
             }).then(done, done);
         });
@@ -147,6 +138,7 @@ describe.only('project api', function () {
 
         beforeEach(function (done) {
             co(function *() {
+                yield testHelpers.clearEnvironment();
                 insertedProjects = yield addTestProjects();
             }).then(done, done);
         });

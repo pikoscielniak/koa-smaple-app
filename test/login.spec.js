@@ -6,6 +6,7 @@ var tokenService = require('../lib/auth/jwtTokenService');
 
 var db = require('../lib/db');
 var loginUrl = '/login';
+var testHelpers = require('./testHelpers');
 
 describe(loginUrl, function () {
 
@@ -16,7 +17,7 @@ describe(loginUrl, function () {
 
     beforeEach(function (done) {
         co(function *() {
-            yield db.users.remove({});
+            yield testHelpers.clearEnvironment();
         }).then(function () {
             request.post('/register')
                 .send(testUser)

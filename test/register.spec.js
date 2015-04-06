@@ -4,6 +4,7 @@ var request = require('supertest').agent(app.listen());
 var co = require('co');
 var tokenService = require('../lib/auth/jwtTokenService');
 
+var testHelpers = require('./testHelpers');
 var db = require('../lib/db');
 var registerUrl = '/register';
 
@@ -16,7 +17,7 @@ describe(registerUrl, function () {
 
     beforeEach(function (done) {
         co(function *() {
-            yield db.users.remove({});
+            yield testHelpers.clearEnvironment();
         }).then(done, done);
     });
 
